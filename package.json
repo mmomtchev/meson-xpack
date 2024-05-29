@@ -45,6 +45,9 @@
       "build": [
         "{{ properties.commandInstall }}",
         "{{ properties.commandPostInstall[os.platform] }}"
+      ],
+      "test": [
+        "meson help"
       ]
     },
     "devDependencies": {

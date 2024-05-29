@@ -34,16 +34,8 @@ jobs:
       - run: npm install
       - run: npx xpm install
       - run: npx xpm run build
-      - name: Test (Windows)
-        run: meson help
-        env:
-          PATH: ${{ github.workspace }}\content\bin;${{ github.workspace }}\xpacks\.bin 
-        if: runner.os == 'Windows'
-      - name: Test (POSIX)
-        run: meson help
-        env:
-          PATH: ${{ github.workspace }}/content/bin:${{ github.workspace }}/xpacks/.bin 
-        if: runner.os != 'Windows'
+      - name: Test
+        run: npx xpm run test
       - name: Pack (Windows)
         shell: bash
         run: 7z a meson-xpack-${{ steps.version.outputs.meson_version }}-${{ inputs.build }}-${{ steps.version.outputs.arch }}.zip content
