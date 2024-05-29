@@ -32,6 +32,7 @@ jobs:
           node -p "'meson_version=' + require('./package.json').xpack.properties.versionMeson" >> $GITHUB_OUTPUT
           node -p "'arch=' + os.platform() + '-' + os.arch()" >> $GITHUB_OUTPUT
       - run: npm install
+      - run: npx xpm install
       - run: npx xpm run build
       - name: Test (Windows)
         run: meson help
