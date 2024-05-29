@@ -48,7 +48,7 @@
       "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.4.99-1"
     },
     "bin": {
-      "meson": "./.content/meson"
+      "meson": "./.content/bin/meson"
     },
     "properties": {
       "versionMeson": "1.4.99",
