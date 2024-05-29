@@ -1,0 +1,60 @@
+{
+  "name": "@mmomtchev/meson-xpack",
+  "version": "1.4.99",
+  "description": "A xPack with meson + node-api",
+  "scripts": {
+    "postversion": "git push && git push --tags && node ./publish.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmomtchev/meson-xpack.git"
+  },
+  "keywords": [
+    "meson",
+    "node-api",
+    "swig",
+    "xpack"
+  ],
+  "author": "Momtchil Momtchev <momtchil@momtchev.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmomtchev/meson-xpack/issues"
+  },
+  "homepage": "https://github.com/mmomtchev/meson-xpack#readme",
+  "xpack": {
+    "minimumXpmRequired": "0.19.1",
+    "binaries": {
+      "destination": "./.content",
+      "rootUrl": "https://github.com/mmomtchev/meson-xpack/releases/download",
+      "skip": 1,
+      "platforms": {}
+    },
+    "bin": {
+      "meson": "./.content/meson"
+    },
+    "properties": {
+      "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson",
+      "commandPostInstall": {
+        "win32": "copy meson content\\bin\\meson",
+        "linux": "cp meson content/bin/meson",
+        "darwin": "cp meson content/bin/meson"
+      }
+    },
+    "actions": {
+      "build": [
+        "{{ properties.commandInstall }}",
+        "{{ properties.commandPostInstall[os.platform] }}"
+      ]
+    },
+    "devDependencies": {
+      "@mmomtchev/python-xpack": {
+        "specifier": "3.12.3-1",
+        "local": "link",
+        "platforms": "all"
+      }
+    }
+  },
+  "dependencies": {
+    "xpm": "^0.19.1"
+  }
+}

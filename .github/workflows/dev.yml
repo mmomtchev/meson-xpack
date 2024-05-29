@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  build_python:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-22.04
+          - macos-11
+          - macos-14
+          - windows-2019
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - run: npm install
+      - run: npx xpm run build
+      - name: Test
+        run: meson help
+        env:
+          PATH: ${{ github.workspace }}/content/bin:${{ github.workspace }}/xpacks/.bin 
+        if: runner.os != 'Windows'
+      - name: Test
+        run: meson help
+        env:
+          PATH: ${{ github.workspace }}\content\bin;${{ github.workspace }}\xpacks\.bin 
+        if: runner.os == 'Windows'
