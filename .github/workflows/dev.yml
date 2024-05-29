@@ -24,6 +24,7 @@ jobs:
         with:
           submodules: true
       - run: npm install
+      - run: xpm install
       - run: npx xpm run build
       - name: Test
         run: meson help
