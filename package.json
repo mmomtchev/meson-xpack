@@ -47,7 +47,7 @@
         "{{ properties.commandPostInstall[os.platform] }}"
       ],
       "test": [
-        "meson help"
+        ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson help"
       ]
     },
     "devDependencies": {
