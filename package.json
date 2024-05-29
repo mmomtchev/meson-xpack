@@ -33,6 +33,7 @@
       "meson": "./.content/meson"
     },
     "properties": {
+      "versionMeson": "1.4.99",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson",
       "commandPostInstall": {
         "win32": "copy wrappers\\meson.cmd content\\bin\\meson.cmd && ren content\\bin\\meson.exe _meson.exe",

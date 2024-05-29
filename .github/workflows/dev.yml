@@ -7,7 +7,7 @@ on:
     branches: main
 
 jobs:
-  build_python:
+  install_meson:
     runs-on: ${{ matrix.platform }}
 
     strategy:
@@ -26,12 +26,12 @@ jobs:
       - run: npm install
       - run: npx xpm install
       - run: npx xpm run build
-      - name: Test
+      - name: Test (POSIX)
         run: meson help
         env:
           PATH: ${{ github.workspace }}/content/bin:${{ github.workspace }}/xpacks/.bin 
         if: runner.os != 'Windows'
-      - name: Test
+      - name: Test (Windows)
         run: meson help
         env:
           PATH: ${{ github.workspace }}\content\bin;${{ github.workspace }}\xpacks\.bin 
