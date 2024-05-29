@@ -35,7 +35,7 @@
     "properties": {
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson",
       "commandPostInstall": {
-        "win32": "copy meson content\\bin\\meson",
+        "win32": "copy meson.cmd content\\bin\\meson",
         "linux": "cp meson content/bin/meson",
         "darwin": "cp meson content/bin/meson"
       }
