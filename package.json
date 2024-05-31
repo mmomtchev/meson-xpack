@@ -54,7 +54,7 @@
       "versionMeson": "1.4.99",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson",
       "commandPostInstall": {
-        "win32": "rc wrappers\\wrapper.rc && cl /I xpacks\\@mmomtchev\\python-xpack\\.content\\include wrappers\\wrapper.c wrappers\\wrapper.res /link /LIBPATH:xpacks\\@mmomtchev\\python-xpack\\.content && copy /Y wrapper.exe content\\bin\\meson.exe",
+        "win32": "rc wrappers\\wrapper.rc && cl /I xpacks\\@mmomtchev\\python-xpack\\.content\\include wrappers\\wrapper.c wrappers\\wrapper.res /Fe:content\\bin\\meson.exe /link /LIBPATH:xpacks\\@mmomtchev\\python-xpack\\.content /DELAYLOAD:python312.dll",
         "linux": "cp wrappers/meson content/bin/meson",
         "darwin": "cp wrappers/meson content/bin/meson"
       }

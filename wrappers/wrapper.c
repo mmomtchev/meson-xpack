@@ -1,8 +1,39 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-#include <wchar.h>
 #include <windows.h>
+#include <delayimp.h>
 #include <libloaderapi.h>
+#include <wchar.h>
+
+char mypath[4096];
+
+/*
+ * Alas, this is very ugly
+ * https://devblogs.microsoft.com/oldnewthing/20170126-00/?p=95265
+ */
+
+#pragma comment(lib, "delayimp")
+
+const char *pylib = "xpacks\\@mmomtchev\\python-xpack\\.content\\python312.dll";
+HMODULE LoadPython() {
+  static char path[4096];
+  const char *root;
+
+  root = getenv("npm_config_local_prefix");
+  if (root == NULL)
+    snprintf(path, 4096, "%s", pylib);
+  else
+    snprintf(path, 4096, "%s\\%s", root, pylib);
+  return LoadLibraryA(path);
+}
+FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli) {
+  if (dliNotify == dliNotePreLoadLibrary && strcmp(pdli->szDll, "python312.dll") == 0) {
+    return (FARPROC)LoadPython();
+  }
+  return NULL;
+}
+ExternC const PfnDliHook __pfnDliNotifyHook2 = delayHook;
+ExternC const PfnDliHook __pfnDliFailureHook2 = delayHook;
 
 int main(int argc, char *argv[]) {
   PyStatus status;
@@ -18,7 +49,9 @@ int main(int argc, char *argv[]) {
 
   text_len = SizeofResource(NULL, hResource);
   text = LockResource(hMemory);
-  init_file_len = strlen(argv[0]) + strlen("__file__ = r''\n");
+
+  GetModuleFileNameA(NULL, mypath, sizeof(mypath));
+  init_file_len = strlen(mypath) + strlen("__file__ = r''\n");
 
   PyConfig_InitPythonConfig(&config);
   config.interactive = 0;
