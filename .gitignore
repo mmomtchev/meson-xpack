@@ -1,3 +1,7 @@
 /content
 /xpacks
 node_modules
+
+*.obj
+*.exe
+*.res

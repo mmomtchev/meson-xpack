@@ -1,4 +1,0 @@
-@ECHO OFF
-SET MYPATH=%~dp0
-SET PYTHONPATH=%MYPATH:~0,-1%\..
-%MYPATH:~0,-1%\_meson.exe %*
