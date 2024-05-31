@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - uses: actions/setup-node@v4
-      - uses: TheMrMilchmann/setup-msvc-dev@v3
+      - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
       - uses: actions/checkout@v4
         with:

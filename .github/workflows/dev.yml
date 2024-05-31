@@ -20,7 +20,7 @@ jobs:
           - windows-2019
 
     steps:
-      - uses: TheMrMilchmann/setup-msvc-dev@v3
+      - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
       - uses: actions/checkout@v4
         with:
