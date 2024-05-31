@@ -1,3 +1,6 @@
+# 1.4.99-3 2024-05-31
+  Include an `.exe` wrapper on Windows
+
 # 1.4.99-2 2024-05-30
   Fix the binary path
 

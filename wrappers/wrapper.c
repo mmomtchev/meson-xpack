@@ -8,26 +8,25 @@
 char mypath[4096];
 
 /*
- * Alas, this is very ugly
+ * This is as close as one get can to an -rpath on Windows:
  * https://devblogs.microsoft.com/oldnewthing/20170126-00/?p=95265
  */
 
 #pragma comment(lib, "delayimp")
 
-const char *pylib = "xpacks\\@mmomtchev\\python-xpack\\.content\\python312.dll";
 HMODULE LoadPython() {
   static char path[4096];
   const char *root;
 
   root = getenv("npm_config_local_prefix");
   if (root == NULL)
-    snprintf(path, 4096, "%s", pylib);
+    snprintf(path, 4096, "%s/%s", PYTHON_PATH, PYTHON_DLL);
   else
-    snprintf(path, 4096, "%s\\%s", root, pylib);
+    snprintf(path, 4096, "%s/%s/%s", root, PYTHON_PATH, PYTHON_DLL);
   return LoadLibraryA(path);
 }
 FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli) {
-  if (dliNotify == dliNotePreLoadLibrary && strcmp(pdli->szDll, "python312.dll") == 0) {
+  if (dliNotify == dliNotePreLoadLibrary && strcmp(pdli->szDll, PYTHON_DLL) == 0) {
     return (FARPROC)LoadPython();
   }
   return NULL;
