@@ -7,6 +7,17 @@
 
 char mypath[4096];
 
+void ErrorExit(const char *fn) {
+  char *error;
+  DWORD dw = GetLastError();
+
+  FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dw,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&error, 0, NULL);
+
+  fprintf(stderr, "%s: %s\n", fn, error);
+  ExitProcess(dw);
+}
+
 /*
  * This is as close as one get can to an -rpath on Windows:
  * https://devblogs.microsoft.com/oldnewthing/20170126-00/?p=95265
@@ -17,13 +28,19 @@ char mypath[4096];
 HMODULE LoadPython() {
   static char path[4096];
   const char *root;
+  HMODULE lib;
 
   root = getenv("npm_config_local_prefix");
   if (root == NULL)
     snprintf(path, 4096, "%s/%s", PYTHON_PATH, PYTHON_DLL);
   else
     snprintf(path, 4096, "%s/%s/%s", root, PYTHON_PATH, PYTHON_DLL);
-  return LoadLibraryA(path);
+  lib = LoadLibraryA(path);
+  if (lib == NULL) {
+    DWORD dw = GetLastError();
+    ErrorExit(path);
+  }
+  return lib;
 }
 FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli) {
   if (dliNotify == dliNotePreLoadLibrary && strcmp(pdli->szDll, PYTHON_DLL) == 0) {
@@ -44,6 +61,9 @@ int main(int argc, char *argv[]) {
   size_t text_len, init_file_len;
 
   hResource = FindResource(NULL, MAKEINTRESOURCEA(101), "TEXT");
+  if (!hResource) {
+    ErrorExit("Failed to load the Python code");
+  }
   hMemory = LoadResource(NULL, hResource);
 
   text_len = SizeofResource(NULL, hResource);
