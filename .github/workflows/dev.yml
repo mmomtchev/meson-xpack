@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: main
+    branches: debug
   pull_request:
-    branches: main
+    branches: debug
 
 jobs:
   install_meson:
@@ -14,9 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - ubuntu-22.04
-          - macos-11
-          - macos-14
           - windows-2019
 
     steps:
@@ -28,5 +25,12 @@ jobs:
       - run: npm install
       - run: npx xpm install
       - run: npx xpm run build
+      - run: |
+          dir
+          dir wrappers
+          dir content\bin
+          content\bin\meson
+          content\bin\meson help
+        if: runner.os == 'Windows'
       - name: Test
         run: npx xpm run test
