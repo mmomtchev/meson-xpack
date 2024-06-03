@@ -51,14 +51,24 @@ FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli) {
 ExternC const PfnDliHook __pfnDliNotifyHook2 = delayHook;
 ExternC const PfnDliHook __pfnDliFailureHook2 = delayHook;
 
+const char freeze[] = "import sys\nsetattr(sys, 'frozen', True)\n";
+
 int main(int argc, char *argv[]) {
   PyStatus status;
   PyConfig config;
   HRSRC hResource = NULL;
   HGLOBAL hMemory = NULL;
   char *text;
-  wchar_t *init_file;
   size_t text_len, init_file_len;
+
+  if (argc > 1 && !strcmp(argv[1], "runpython")) {
+    text = malloc(sizeof(char) * 4096);
+    if (getenv("npm_config_local_prefix") == NULL)
+      snprintf(text, 4096, "%s/python.exe", PYTHON_PATH);
+    else
+      snprintf(text, 4096, "%s/%s/python.exe", getenv("npm_config_local_prefix"), PYTHON_PATH);
+    return execvp(text, argv + 1);
+  }
 
   hResource = FindResource(NULL, MAKEINTRESOURCEA(101), "TEXT");
   if (!hResource) {
@@ -75,8 +85,8 @@ int main(int argc, char *argv[]) {
   PyConfig_InitPythonConfig(&config);
   config.interactive = 0;
 
-  config.run_command = malloc(sizeof(wchar_t) * (text_len + init_file_len + 1));
-  swprintf(config.run_command, init_file_len + text_len + 1, L"__file__ = r'%hs'\n%hs", argv[0], text);
+  config.run_command = malloc(sizeof(wchar_t) * (text_len + init_file_len + strlen(freeze) + 1));
+  swprintf(config.run_command, init_file_len + text_len + strlen(freeze) + 1, L"__file__ = r'%hs'\n%hs%hs", mypath, freeze, text);
 
   status = PyConfig_SetBytesArgv(&config, argc, argv);
   if (PyStatus_Exception(status)) {

@@ -62,6 +62,7 @@
       }
     },
     "actions": {
+      "compile": "{{ properties.commandPostInstall[os.platform] }}",
       "build": [
         "{{ properties.commandInstall }}",
         "{{ properties.commandPostInstall[os.platform] }}"

@@ -1,3 +1,7 @@
+# 1.4.99-4 2024-06-03
+  Implement the `PyInstaller` protocol, `meson` uses it
+  Ensure precedence over a pip-installed `meson`
+
 # 1.4.99-3 2024-05-31
   Include an `.exe` wrapper on Windows
 
