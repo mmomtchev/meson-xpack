@@ -1,4 +1,5 @@
 # 1.4.99-4 2024-06-03
+  Downgrade Python to 3.10 for various reasons (`distutils` being the most important)
   Implement the `PyInstaller` protocol, `meson` uses it
   Ensure precedence over a pip-installed `meson`
 
