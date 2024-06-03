@@ -73,7 +73,7 @@
     },
     "devDependencies": {
       "@mmomtchev/python-xpack": {
-        "specifier": "3.10.14-1",
+        "specifier": "3.10.14-2",
         "local": "link",
         "platforms": "all"
       }
