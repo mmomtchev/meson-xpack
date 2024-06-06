@@ -1,3 +1,6 @@
+# 1.4.99-6 2024-06-06
+  * Automatically parse the `npm_config_` `npm` install options
+
 # 1.4.99-5 2024-06-05
   * Pass the auto-detected `ninja` to `CMake` allowing for transparent compatibility with the `ninja` xPack which uses `ninja.cmd`
 
