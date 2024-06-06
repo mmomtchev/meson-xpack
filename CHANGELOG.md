@@ -1,3 +1,6 @@
+# 1.4.99-7 2024-06-07
+  * Ignore `npm_config_prefix`
+
 # 1.4.99-6 2024-06-06
   * Automatically parse the `npm_config_` `npm` install options
 
