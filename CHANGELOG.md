@@ -1,3 +1,6 @@
+# 1.4.99-8 2024-06-09
+  * Fix building with static compiler runtime (`/MT`) on Windows
+
 # 1.4.99-7 2024-06-07
   * Ignore `npm_config_prefix`
 
