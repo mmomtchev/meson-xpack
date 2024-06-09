@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.4.99-7",
+  "version": "1.4.99-8",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -29,23 +29,23 @@
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "meson-xpack-1.4.99-7-darwin-arm64.tar.gz",
-          "sha256": "4e799735ef250d753322bd423a34471a392b47791687976854867f819c13e8f3"
+          "fileName": "meson-xpack-1.4.99-8-darwin-arm64.tar.gz",
+          "sha256": "b54a9316c9799e188d8e6f8248f8204cc703759e0a2983aa112291ac42c3e051"
         },
         "darwin-x64": {
-          "fileName": "meson-xpack-1.4.99-7-darwin-x64.tar.gz",
-          "sha256": "1479076f844bd7d3ff4c1b41ed9876fbeeb498fc9f05bb56e3f30ae90dcd9010"
+          "fileName": "meson-xpack-1.4.99-8-darwin-x64.tar.gz",
+          "sha256": "53e1395728ad4db0756dcc1a602d19f326454d20aa4d78b187cabbfa7b3464e5"
         },
         "linux-x64": {
-          "fileName": "meson-xpack-1.4.99-7-linux-x64.tar.gz",
-          "sha256": "cb7de9434713e08e8787f60f1bdf54948b2f42fcfb63b98b547f618fde2ab7bb"
+          "fileName": "meson-xpack-1.4.99-8-linux-x64.tar.gz",
+          "sha256": "79212b6186bc057011363d2964f4a62b0a5e3894adc1e82ad20f75e3e1210a49"
         },
         "win32-x64": {
-          "fileName": "meson-xpack-1.4.99-7-win32-x64.zip",
-          "sha256": "a1c744e67d47dc55983cf9768e046e737aa29eee5b72ab127c7542989bd7e8cd"
+          "fileName": "meson-xpack-1.4.99-8-win32-x64.zip",
+          "sha256": "5d9a765171e59f36d0cc7051a36719efb4f7221b1ae011ce2b2e556d5bf6c5f6"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.4.99-7"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.4.99-8"
     },
     "bin": {
       "meson": "./.content/bin/meson"
