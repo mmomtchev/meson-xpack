@@ -1,3 +1,6 @@
+# 1.4.99-9 2024-06-26
+  * Use `npm_package_json` as a starting point instead of `npm_local_prefix` when searching for the Python DLL on Windows
+
 # 1.4.99-8 2024-06-09
   * Fix building with static compiler runtime (`/MT`) on Windows
 

@@ -30,11 +30,11 @@ HMODULE LoadPython() {
   const char *root;
   HMODULE lib;
 
-  root = getenv("npm_config_local_prefix");
+  root = getenv("npm_package_json");
   if (root == NULL)
-    snprintf(path, 4096, "%s/%s", PYTHON_PATH, PYTHON_DLL);
+    snprintf(path, 4096, "\\..\\%s\\%s", PYTHON_PATH, PYTHON_DLL);
   else
-    snprintf(path, 4096, "%s/%s/%s", root, PYTHON_PATH, PYTHON_DLL);
+    snprintf(path, 4096, "\\..\\%s\\%s\\%s", root, PYTHON_PATH, PYTHON_DLL);
   lib = LoadLibraryA(path);
   if (lib == NULL) {
     DWORD dw = GetLastError();
