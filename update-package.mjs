@@ -8,7 +8,7 @@ const pkgJson = JSON.parse(await fs.readFile(path.resolve(dir, 'package.json'), 
 const files = await fs.readdir(dir);
 const nameSplit = pkgJson.name.split('/');
 const name = nameSplit[nameSplit.length - 1];
-const re = new RegExp(`${name}-([0-9]+\\.[0-9]+\\.[0-9]+-[0-9]+)-([\\w\\-]+)-([\\w\\-]+)`);
+const re = new RegExp(`${name}-([0-9]+\\.[0-9]+\\.[0-9a-z]+-[0-9]+)-([\\w\\-]+)-([\\w\\-]+)`);
 let version;
 for (const f of files) {
   const r = re.exec(f);
