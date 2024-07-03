@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.4.99-9",
+  "version": "1.5.0rc2-1",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -29,23 +29,23 @@
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "meson-xpack-1.4.99-9-darwin-arm64.tar.gz",
-          "sha256": "23fd335c0dfb861d7ad86ce1f557866d84c69d6acbd4fbfc1da362a64eae4f8c"
+          "fileName": "meson-xpack-1.5.0rc2-1-darwin-arm64.tar.gz",
+          "sha256": "901520f806fb878e7a6ece5d3ec1e9c77dcd9f899ea57f2e0746b7ace3d3a186"
         },
         "darwin-x64": {
-          "fileName": "meson-xpack-1.4.99-9-darwin-x64.tar.gz",
-          "sha256": "2bed284a9f2fd8b7650d40c418cbdcfd3da1e9e529f9c6ae8a5a05a2b5a1c851"
+          "fileName": "meson-xpack-1.5.0rc2-1-darwin-x64.tar.gz",
+          "sha256": "9732cd31378fc6cb7dddb3e6b16f350d1b6b4e314a0438858d7bc372714a253c"
         },
         "linux-x64": {
-          "fileName": "meson-xpack-1.4.99-9-linux-x64.tar.gz",
-          "sha256": "98ab2284c6944e66d09256e977f5715bebc9793b04a561a8b7a4852d71363d32"
+          "fileName": "meson-xpack-1.5.0rc2-1-linux-x64.tar.gz",
+          "sha256": "6b4bebf6a35559c066073daa4b7dbef9ba3af116517f9cead6946fe56cfdb1c6"
         },
         "win32-x64": {
-          "fileName": "meson-xpack-1.4.99-9-win32-x64.zip",
-          "sha256": "a5d87fced29ee1099520001ebd0e2167c044d68caba1633e81b4603aff5e42d4"
+          "fileName": "meson-xpack-1.5.0rc2-1-win32-x64.zip",
+          "sha256": "2f6bc981119d709a9871c950bd368481754b3eac625fd00ef196c89e2bdd756f"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.4.99-9"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.5.0rc2-1"
     },
     "bin": {
       "meson": "./.content/bin/meson"
