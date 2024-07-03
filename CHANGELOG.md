@@ -1,3 +1,8 @@
+# 1.5.0rc2 2024-07-03
+  * First tagged release, aligned with `meson` 1.5.0rc2
+  * Support setting the `rpath` in the `cmake` module
+  * Display a proper error message if the `node-api` download fails
+
 # 1.4.99-9 2024-06-26
   * Use `npm_package_json` as a starting point instead of `npm_local_prefix` when searching for the Python DLL on Windows
 
