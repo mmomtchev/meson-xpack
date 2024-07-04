@@ -68,7 +68,9 @@
         "{{ properties.commandPostInstall[os.platform] }}"
       ],
       "test": [
-        ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson help"
+        ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson help",
+        ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson --internal copy package.json temp.todelete",
+        ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson --internal delwithsuffix . todelete"
       ]
     },
     "devDependencies": {
