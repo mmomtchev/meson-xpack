@@ -1,4 +1,7 @@
-# 1.5.0rc2 2024-07-03
+# 1.5.0rc2-2 2024-07-04
+  * Fix [#1](https://github.com/mmomtchev/meson-xpack/issues/1), pass `--internal` to `meson` on Windows
+
+# 1.5.0rc2-1 2024-07-03
   * First tagged release, aligned with `meson` 1.5.0rc2
   * Support setting the `rpath` in the `cmake` module
   * Display a proper error message if the `node-api` download fails

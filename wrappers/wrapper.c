@@ -84,6 +84,7 @@ int main(int argc, char *argv[]) {
 
   PyConfig_InitPythonConfig(&config);
   config.interactive = 0;
+  config.parse_argv = 0;
 
   config.run_command = malloc(sizeof(wchar_t) * (text_len + init_file_len + strlen(freeze) + 1));
   swprintf(config.run_command, init_file_len + text_len + strlen(freeze) + 1, L"__file__ = r'%hs'\n%hs%hs", mypath, freeze, text);
