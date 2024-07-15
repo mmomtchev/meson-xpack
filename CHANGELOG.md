@@ -1,3 +1,6 @@
+# 1.5.0-1 2024-07-15
+  * hadron 1.5.0, first official release
+
 # 1.5.0rc2-2 2024-07-04
   * Fix [#1](https://github.com/mmomtchev/meson-xpack/issues/1), pass `--internal` to `meson` on Windows
 

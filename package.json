@@ -51,8 +51,8 @@
       "meson": "./.content/bin/meson"
     },
     "properties": {
-      "versionMeson": "1.5.0rc2",
-      "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-1.5.0rc2",
+      "versionMeson": "1.5.0",
+      "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-1.5.0",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
       "pythonDLL": "python310.dll",
       "commandPostInstall": {
