@@ -73,7 +73,7 @@
         ".{{ path.sep }}content{{ path.sep }}bin{{ path.sep }}meson --internal delwithsuffix . todelete"
       ]
     },
-    "devDependencies": {
+    "dependencies": {
       "@mmomtchev/python-xpack": {
         "specifier": "3.10.14-5",
         "local": "link",

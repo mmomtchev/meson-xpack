@@ -1,3 +1,6 @@
+# 1.5.0-2
+  * the Python xpack is now a production dependency
+
 # 1.5.0-1 2024-07-15
   * hadron 1.5.0, first official release
 
