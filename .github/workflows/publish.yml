@@ -3,6 +3,9 @@ name: Publish
 on:
   workflow_dispatch:
     inputs:
+      meson:
+        type: string
+        description: meson version to use
       build:
         type: number
         description: the build number to use
@@ -27,11 +30,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Get meson version and Node.js arch name
+      - name: Get Node.js arch name
         id: version
         shell: bash
         run: |
-          node -p "'meson_version=' + require('./package.json').xpack.properties.versionMeson" >> $GITHUB_OUTPUT
           node -p "'arch=' + os.platform() + '-' + os.arch()" >> $GITHUB_OUTPUT
       - run: npm install
       - run: npx xpm install
@@ -40,11 +42,11 @@ jobs:
         run: npx xpm run test
       - name: Pack (Windows)
         shell: bash
-        run: 7z a meson-xpack-${{ steps.version.outputs.meson_version }}-${{ inputs.build }}-${{ steps.version.outputs.arch }}.zip content
+        run: 7z a meson-xpack-${{ inputs.meson }}-${{ inputs.build }}-${{ steps.version.outputs.arch }}.zip content
         if: runner.os == 'Windows'
       - name: Pack (POSIX)
         shell: bash
-        run: tar -zcvf meson-xpack-${{ steps.version.outputs.meson_version }}-${{ inputs.build }}-${{ steps.version.outputs.arch }}.tar.gz content
+        run: tar -zcvf meson-xpack-${{ inputs.meson }}-${{ inputs.build }}-${{ steps.version.outputs.arch }}.tar.gz content
         if: runner.os != 'Windows'
       - uses: actions/upload-artifact@v4
         with:
@@ -62,11 +64,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Get meson version
-        id: version
-        shell: bash
-        run: |
-          node -p "'meson_version=' + require('./package.json').xpack.properties.versionMeson" >> $GITHUB_OUTPUT
       - uses: actions/download-artifact@v4
         with:
           path: ${{ github.workspace }}
@@ -77,13 +74,13 @@ jobs:
         with:
           default_author: github_actions
           add: package.json
-          message: 'update package.json for ${{ steps.version.outputs.meson_version }}-${{ inputs.build }}'
+          message: 'update package.json for ${{ inputs.meson }}-${{ inputs.build }}'
           push: true
-          tag: v${{ steps.version.outputs.meson_version }}-${{ inputs.build }}
+          tag: v${{ inputs.meson }}-${{ inputs.build }}
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: meson-xpack-*
           draft: true
-          tag: v${{ steps.version.outputs.meson_version }}-${{ inputs.build }}
+          tag: v${{ inputs.meson }}-${{ inputs.build }}
 

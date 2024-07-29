@@ -8,8 +8,9 @@ const pkgJson = JSON.parse(await fs.readFile(path.resolve(dir, 'package.json'), 
 const files = await fs.readdir(dir);
 const nameSplit = pkgJson.name.split('/');
 const name = nameSplit[nameSplit.length - 1];
-const re = new RegExp(`${name}-([0-9]+\\.[0-9]+\\.[0-9a-z]+-[0-9]+)-([\\w\\-]+)-([\\w\\-]+)`);
+const re = new RegExp(`${name}-([0-9]+\\.[0-9]+\\.[0-9a-z]+)-([0-9]+)-([\\w\\-]+)-([\\w\\-]+)`);
 let version;
+let build;
 for (const f of files) {
   const r = re.exec(f);
   if (r === null) continue;
@@ -18,6 +19,11 @@ for (const f of files) {
     version = r[1];
   if (version != r[1])
     throw new Error(`Versions do not match, ${version} != ${r[1]}`);
+  if (!build)
+    build = r[2];
+  if (build != r[2])
+    throw new Error(`Build numbers do not match, ${build} != ${r[2]}`);
+
 
   const data = await fs.readFile(path.resolve(dir, f));
   const hash = crypto.createHash('sha256');
@@ -40,8 +46,9 @@ if (!version) {
   throw new Error(`No binaries found matching ${re.toString()}`);
 }
 
-pkgJson.version = version;
-pkgJson.xpack.binaries.baseUrl = pkgJson.xpack.binaries.rootUrl + '/v' + version
+pkgJson.version = `${version}-${build}`;
+pkgJson.xpack.binaries.baseUrl = pkgJson.xpack.binaries.rootUrl + '/v' + pkgJson.version;
+pkgJson.xpack.properties['version'] = version;
 
 const output = JSON.stringify(pkgJson, undefined, '  ');
 console.log(output);
