@@ -1,3 +1,6 @@
+# 1.5.1-2
+  * Fix uninstallable package
+
 # 1.5.1-1
   * Update `meson` to 1.5.1
 

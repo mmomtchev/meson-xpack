@@ -23,14 +23,13 @@ for (const f of files) {
     build = r[2];
   if (build != r[2])
     throw new Error(`Build numbers do not match, ${build} != ${r[2]}`);
-
+  const platform = r[3].toLowerCase();
+  const arch = r[4].toLowerCase();
 
   const data = await fs.readFile(path.resolve(dir, f));
   const hash = crypto.createHash('sha256');
   hash.update(data);
   const sig = hash.digest('hex');
-  const platform = r[2].toLowerCase();
-  const arch = r[3].toLowerCase();
   console.log(f.padEnd(40), `${platform}-${arch}`.padEnd(20), sig);
   if (!pkgJson.xpack.binaries)
     pkgJson.xpack.binaries = { platforms: {} };
