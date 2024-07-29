@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.5.0-1",
+  "version": "1.5.1-1",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -45,17 +45,25 @@
           "sha256": "a55a09069422afcf76f2b2456d81f5e5a7521fbb3ded0a3b6946dd5efc040c9f"
         },
         "1-linux": {
-          "fileName": "meson-xpack-1.5.0-1-linux-x64.tar.gz",
-          "sha256": "0aa81b761d3a8e1a54f5e96da5b45124beb4f0664df36db336629b1859408a7d"
+          "fileName": "meson-xpack-1.5.1-1-linux-x64.tar.gz",
+          "sha256": "cca957d593b6a71188da6ce3c0ff803960074ece0e9f5daf0cccb6395a20a729"
+        },
+        "1-darwin": {
+          "fileName": "meson-xpack-1.5.1-1-darwin-x64.tar.gz",
+          "sha256": "986d62088270031b8875c8918019667cc44312bc00cee8f8dddde0c81f27dc47"
+        },
+        "1-win32": {
+          "fileName": "meson-xpack-1.5.1-1-win32-x64.zip",
+          "sha256": "7825d8b13a9b892a43559514077081339524629378c8f959e800866570bd6dd2"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.5.0-1"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.5.1-1"
     },
     "bin": {
       "meson": "./.content/bin/meson"
     },
     "properties": {
-      "version": "1.5.0",
+      "version": "1.5.1",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-{{ properties.version }}",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
       "pythonDLL": "python310.dll",
