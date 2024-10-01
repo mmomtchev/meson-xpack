@@ -66,7 +66,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          node -p "'meson_version=' + require('./package.json').version.split('-')[0]" >> $GITHUB_OUTPUT
+          node -p "'meson_version=' + require('./package.json').xpack.properties.version" >> $GITHUB_OUTPUT
           node -p "'build_number=' + require('./package.json').version.split('-')[1]" >> $GITHUB_OUTPUT
           node -p "'arch=' + os.platform() + '-' + os.arch()" >> $GITHUB_OUTPUT
       - name: Update package.json
