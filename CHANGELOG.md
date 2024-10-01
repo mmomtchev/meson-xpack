@@ -1,3 +1,7 @@
+# 1.5.2-1 2024-10-01
+  * Update `meson` to 1.5.2
+  * Fix [`hadron#37`](https://github.com/mmomtchev/hadron/issues/37), do not eliminate `/usr/local/include` when used in `-isystem` with `-isysroot`
+
 # 1.5.1-2 2024-07-29
   * Fix uninstallable package
 
