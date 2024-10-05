@@ -1,3 +1,7 @@
+# 1.5.2-2 2024-10-01
+  * Fix [`hadron#46`](https://github.com/mmomtchev/hadron/issues/46), in the `cmake` module, installing multiple files from a variable in `INSTALL(FILES...)` does not work
+  * Fix [`hadron#48`](https://github.com/mmomtchev/hadron/issues/48), in the `cmake` module, generated files in `INSTALL(FILES...)` should be ignored with a warning
+
 # 1.5.2-1 2024-10-01
   * Update `meson` to 1.5.2
   * Fix [`hadron#37`](https://github.com/mmomtchev/hadron/issues/37), do not eliminate `/usr/local/include` when used in `-isystem` with `-isysroot`
