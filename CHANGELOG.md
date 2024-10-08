@@ -1,3 +1,7 @@
+# 1.5.2-3 2024-10-08
+  * Fix [`hadron#51`](https://github.com/mmomtchev/hadron/issues/51), do not pass paths with `\`to CMake on Windows
+  * Fix [`hadron#53`](https://github.com/mmomtchev/hadron/issues/53), accept library names specified with `.lib` extension in CMake on Windows
+
 # 1.5.2-2 2024-10-01
   * Fix [`hadron#46`](https://github.com/mmomtchev/hadron/issues/46), in the `cmake` module, installing multiple files from a variable in `INSTALL(FILES...)` does not work
   * Fix [`hadron#48`](https://github.com/mmomtchev/hadron/issues/48), in the `cmake` module, generated files in `INSTALL(FILES...)` should be ignored with a warning

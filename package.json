@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.5.2-2",
+  "version": "1.5.2-3",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -52,7 +52,7 @@
     },
     "properties": {
       "version": "1.5.2",
-      "versionSuffix": ".1",
+      "versionSuffix": ".2",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-{{ properties.version }}{{ properties.versionSuffix }}",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
       "pythonDLL": "python310.dll",
