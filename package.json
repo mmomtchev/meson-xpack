@@ -29,23 +29,23 @@
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "meson-xpack-1.5.2-3-darwin-arm64.tar.gz",
-          "sha256": "003069e2ba49790cef1d18063b4a05bd489e1d81ae7ed1c0809f8b75cc9665a7"
+          "fileName": "meson-xpack-1.5.2-4-darwin-arm64.tar.gz",
+          "sha256": "53afe961f81e46ec3381e746d19d79093cffee7eef068f32b28ffb3159e03dad"
         },
         "darwin-x64": {
-          "fileName": "meson-xpack-1.5.2-3-darwin-x64.tar.gz",
-          "sha256": "f69f75c12564a49cb13a6eab5761a4df610597d4d235c2dcd3baa23e3582dce5"
+          "fileName": "meson-xpack-1.5.2-4-darwin-x64.tar.gz",
+          "sha256": "1363cf33dd22d1dc48d2721495023de6c43ab585ac60722d5affd2f9f624ddcb"
         },
         "linux-x64": {
-          "fileName": "meson-xpack-1.5.2-3-linux-x64.tar.gz",
-          "sha256": "5bb20f7f39233b103c80a36120e92b89df61966094516c75d956ca916da14a01"
+          "fileName": "meson-xpack-1.5.2-4-linux-x64.tar.gz",
+          "sha256": "94ffde2fe56c7ae17cf97b1c2d0609660047e76305706fe3a1ed14d90ccc5c07"
         },
         "win32-x64": {
-          "fileName": "meson-xpack-1.5.2-3-win32-x64.zip",
-          "sha256": "f8f471a83563812b470f0f5d35eb3a3333eb49fb40b135c245b4dcc62f29ca8b"
+          "fileName": "meson-xpack-1.5.2-4-win32-x64.zip",
+          "sha256": "cfc1e85a0befd6a1fab21e3e9965fa80e2bd483561c101137feb682185711d1e"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.5.2-3"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.5.2-4"
     },
     "bin": {
       "meson": "./.content/bin/meson"
