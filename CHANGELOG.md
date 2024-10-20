@@ -1,3 +1,6 @@
+# 1.5.2-4 2024-10-20
+  * Fix [`hadron#55`](https://github.com/mmomtchev/hadron/issues/55), always resolve `emnapi` paths to allow building Node-API WASM modules with `emnapi` installed in `../emnapi` relative to the project root
+
 # 1.5.2-3 2024-10-08
   * Fix [`hadron#51`](https://github.com/mmomtchev/hadron/issues/51), do not pass paths with `\`to CMake on Windows
   * Fix [`hadron#53`](https://github.com/mmomtchev/hadron/issues/53), accept library names specified with `.lib` extension in CMake on Windows
