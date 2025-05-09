@@ -51,8 +51,8 @@
       "meson": "./.content/bin/meson"
     },
     "properties": {
-      "version": "1.5.2",
-      "versionSuffix": ".3",
+      "version": "1.8.0",
+      "versionSuffix": "",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-{{ properties.version }}{{ properties.versionSuffix }}",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
       "pythonDLL": "python310.dll",

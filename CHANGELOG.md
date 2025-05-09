@@ -1,3 +1,9 @@
+# 1.8.0-1 2025-05-09
+  * Update meson to 1.8.0 from upstream
+  * Bump the default C++ standard level to C++20
+  * Allow configuring node-addon-api projects without internet connection if the headers have been previously downloaded in the cache
+  * Fix [`hadron#60`](https://github.com/mmomtchev/hadron/issues/60), when compiling to WASM on macOS `meson` invokes `install_name_tool` on the JavaScript files
+
 # 1.5.2-4 2024-10-20
   * Fix [`hadron#55`](https://github.com/mmomtchev/hadron/issues/55), always resolve `emnapi` paths to allow building Node-API WASM modules with `emnapi` installed in `../emnapi` relative to the project root
 
