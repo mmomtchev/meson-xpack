@@ -1,11 +1,8 @@
-#define PY_SSIZE_T_CLEAN
-#include <Python.h>
-#include <windows.h>
-#include <delayimp.h>
-#include <libloaderapi.h>
 #include <wchar.h>
+#include <windows.h>
+#include <stdio.h>
 
-char mypath[4096];
+#define MAX_CMDLINE 32768
 
 void ErrorExit(const char *fn) {
   char *error;
@@ -18,57 +15,76 @@ void ErrorExit(const char *fn) {
   ExitProcess(dw);
 }
 
-/*
- * This is as close as one get can to an -rpath on Windows:
- * https://devblogs.microsoft.com/oldnewthing/20170126-00/?p=95265
+/**
+ * This comes from
+ * https://github.com/pypa/setuptools/blob/main/launcher.c
+ *
+ * Unlike the original, the xpack version does not rely on a separate
+ * Python script file - the Python script file is included in the EXE
+ * via the Windows Resource Compiler
  */
+int child_pid = 0;
 
-#pragma comment(lib, "delayimp")
-
-HMODULE LoadPython() {
-  static char path[4096];
-  const char *root;
-  HMODULE lib;
-
-  root = getenv("npm_package_json");
-  if (root == NULL)
-    snprintf(path, 4096, "%s\\%s", PYTHON_PATH, PYTHON_DLL);
-  else
-    snprintf(path, 4096, "%s\\..\\%s\\%s", root, PYTHON_PATH, PYTHON_DLL);
-  lib = LoadLibraryA(path);
-  if (lib == NULL) {
-    DWORD dw = GetLastError();
-    ErrorExit(path);
+void pass_control_to_child(DWORD control_type) {
+  /*
+   * distribute-issue207
+   * passes the control event to child process (Python)
+   */
+  if (!child_pid) {
+    return;
   }
-  return lib;
+  GenerateConsoleCtrlEvent(child_pid, 0);
 }
-FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli) {
-  if (dliNotify == dliNotePreLoadLibrary && strcmp(pdli->szDll, PYTHON_DLL) == 0) {
-    return (FARPROC)LoadPython();
+
+BOOL control_handler(DWORD control_type) {
+  /*
+   * distribute-issue207
+   * control event handler callback function
+   */
+  switch (control_type) {
+  case CTRL_C_EVENT:
+    pass_control_to_child(0);
+    break;
   }
-  return NULL;
+  return TRUE;
 }
-ExternC const PfnDliHook __pfnDliNotifyHook2 = delayHook;
-ExternC const PfnDliHook __pfnDliFailureHook2 = delayHook;
+
+int create_and_wait_for_subprocess(char *command) {
+  /*
+   * distribute-issue207
+   * launches child process (Python)
+   */
+  DWORD return_value = 0;
+  LPSTR commandline = command;
+  STARTUPINFOA s_info;
+  PROCESS_INFORMATION p_info;
+  ZeroMemory(&p_info, sizeof(p_info));
+  ZeroMemory(&s_info, sizeof(s_info));
+  s_info.cb = sizeof(STARTUPINFO);
+  // set-up control handler callback function
+  SetConsoleCtrlHandler((PHANDLER_ROUTINE)control_handler, TRUE);
+  if (!CreateProcessA(NULL, commandline, NULL, NULL, TRUE, 0, NULL, NULL, &s_info, &p_info)) {
+    fprintf(stderr, "failed to create process.\n");
+    return 0;
+  }
+  child_pid = p_info.dwProcessId;
+  // wait for Python to exit
+  WaitForSingleObject(p_info.hProcess, INFINITE);
+  if (!GetExitCodeProcess(p_info.hProcess, &return_value)) {
+    fprintf(stderr, "failed to get exit code from process.\n");
+    return 0;
+  }
+  return return_value;
+}
 
 const char freeze[] = "import sys\nsetattr(sys, 'frozen', True)\n";
 
-int main(int argc, char *argv[]) {
-  PyStatus status;
-  PyConfig config;
+char *get_python_code() {
   HRSRC hResource = NULL;
   HGLOBAL hMemory = NULL;
-  char *text;
+  char *text, *result, *mypath, *escaped;
+  char *in, *out;
   size_t text_len, init_file_len;
-
-  if (argc > 1 && !strcmp(argv[1], "runpython")) {
-    text = malloc(sizeof(char) * 4096);
-    if (getenv("npm_config_local_prefix") == NULL)
-      snprintf(text, 4096, "%s/python.exe", PYTHON_PATH);
-    else
-      snprintf(text, 4096, "%s/%s/python.exe", getenv("npm_config_local_prefix"), PYTHON_PATH);
-    return execvp(text, argv + 1);
-  }
 
   hResource = FindResource(NULL, MAKEINTRESOURCEA(101), "TEXT");
   if (!hResource) {
@@ -76,39 +92,46 @@ int main(int argc, char *argv[]) {
   }
   hMemory = LoadResource(NULL, hResource);
 
-  text_len = SizeofResource(NULL, hResource);
+  mypath = malloc(MAX_PATH + 1);
+  GetModuleFileNameA(NULL, mypath, MAX_PATH);
+  init_file_len = strlen(mypath) + strlen("__file__ = r''\n") +
+    strlen(freeze) + SizeofResource(NULL, hResource) + 10;
+
   text = LockResource(hMemory);
+  escaped = malloc(MAX_CMDLINE);
+  for (in = text, out = escaped; *in; in++, out++) {
+    if (*in == '\\' && *(in+1) == '"') {
+      *(out++) = '\\';
+      *(out++) = '\\';
+      in++;
+    }
+    if (*in == '"') {
+      *(out++) = '\\';
+    }
+    *out = *in;
+  }
+  *out = 0;
 
-  GetModuleFileNameA(NULL, mypath, sizeof(mypath));
-  init_file_len = strlen(mypath) + strlen("__file__ = r''\n");
+  result = malloc(init_file_len);
+  snprintf(result, init_file_len, "__file__ = r'%s'\n%s\n%s", mypath, freeze, escaped);
 
-  PyConfig_InitPythonConfig(&config);
-  config.interactive = 0;
-  config.parse_argv = 0;
+  return result;
+}
 
-  config.run_command = malloc(sizeof(wchar_t) * (text_len + init_file_len + strlen(freeze) + 1));
-  swprintf(config.run_command, init_file_len + text_len + strlen(freeze) + 1, L"__file__ = r'%hs'\n%hs%hs", mypath, freeze, text);
+int main(int argc, char *argv[]) {
+  char *cmd, *code;
+  int i;
 
-  status = PyConfig_SetBytesArgv(&config, argc, argv);
-  if (PyStatus_Exception(status)) {
-    goto exception;
+  code = get_python_code();
+  cmd = malloc(MAX_CMDLINE);
+  snprintf(cmd, MAX_CMDLINE, "python -c \"%s\"", code);
+  for (i = 1; i < argc; i++)
+    snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), " %s", argv[i]);
+
+  if (strlen(cmd) >= MAX_CMDLINE - 1) {
+    fprintf(stderr, "Command line too long, limited to %d characters\n", MAX_CMDLINE - 1);
+    exit(1);
   }
 
-  status = Py_InitializeFromConfig(&config);
-  if (PyStatus_Exception(status)) {
-    goto exception;
-  }
-
-  PyConfig_Clear(&config);
-
-  return Py_RunMain();
-
-exception:
-  printf("Error\n");
-  PyConfig_Clear(&config);
-  if (PyStatus_IsExit(status)) {
-    return status.exitcode;
-  }
-  PyErr_Print();
-  Py_ExitStatusException(status);
+  return create_and_wait_for_subprocess(cmd);
 }
