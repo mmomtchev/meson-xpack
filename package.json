@@ -76,7 +76,7 @@
     },
     "dependencies": {
       "@mmomtchev/python-xpack": {
-        "specifier": "3.10.14-5",
+        "specifier": "3.12.11-2",
         "local": "link",
         "platforms": "all"
       }
