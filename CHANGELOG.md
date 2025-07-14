@@ -1,3 +1,6 @@
+# 1.8.0-2 2025-07-14
+  * New Windows script launcher that is independent of the installed Python version
+
 # 1.8.0-1 2025-05-09
   * Update meson to 1.8.0 from upstream
   * Bump the default C++ standard level to C++20
