@@ -18,10 +18,6 @@ void ErrorExit(const char *fn) {
 /**
  * This comes from
  * https://github.com/pypa/setuptools/blob/main/launcher.c
- *
- * Unlike the original, the xpack version does not rely on a separate
- * Python script file - the Python script file is included in the EXE
- * via the Windows Resource Compiler
  */
 int child_pid = 0;
 
@@ -77,56 +73,32 @@ int create_and_wait_for_subprocess(char *command) {
   return return_value;
 }
 
-const char freeze[] = "import sys\nsetattr(sys, 'frozen', True)\n";
+char *get_python_script() {
+  static char wrapper[MAX_PATH];
+  char *ext;
 
-char *get_python_code() {
-  HRSRC hResource = NULL;
-  HGLOBAL hMemory = NULL;
-  char *text, *result, *mypath, *escaped;
-  char *in, *out;
-  size_t text_len, init_file_len;
-
-  hResource = FindResource(NULL, MAKEINTRESOURCEA(101), "TEXT");
-  if (!hResource) {
-    ErrorExit("Failed to load the Python code");
+  /* compute script name from our .exe name*/
+  GetModuleFileNameA(NULL, wrapper, MAX_PATH);
+  ext = strrchr(wrapper, '.');
+  if (ext == NULL) {
+    fprintf(stderr, "Cannot deduce Python script name from %s\n", wrapper);
+    exit(1);
   }
-  hMemory = LoadResource(NULL, hResource);
+  *ext = 0;
 
-  mypath = malloc(MAX_PATH + 1);
-  GetModuleFileNameA(NULL, mypath, MAX_PATH);
-  init_file_len = strlen(mypath) + strlen("__file__ = r''\n") +
-    strlen(freeze) + SizeofResource(NULL, hResource) + 10;
-
-  text = LockResource(hMemory);
-  escaped = malloc(MAX_CMDLINE);
-  for (in = text, out = escaped; *in; in++, out++) {
-    if (*in == '\\' && *(in+1) == '"') {
-      *(out++) = '\\';
-      *(out++) = '\\';
-      in++;
-    }
-    if (*in == '"') {
-      *(out++) = '\\';
-    }
-    *out = *in;
-  }
-  *out = 0;
-
-  result = malloc(init_file_len);
-  snprintf(result, init_file_len, "__file__ = r'%s'\n%s\n%s", mypath, freeze, escaped);
-
-  return result;
+  return wrapper;
 }
 
 int main(int argc, char *argv[]) {
-  char *cmd, *code;
+  char *cmd, *script;
   int i;
 
-  code = get_python_code();
+  script = get_python_script();
   cmd = malloc(MAX_CMDLINE);
-  snprintf(cmd, MAX_CMDLINE, "python -c \"%s\"", code);
+  snprintf(cmd, MAX_CMDLINE, "cmd /s /c \"python.cmd \"%s\"", script);
   for (i = 1; i < argc; i++)
     snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), " %s", argv[i]);
+  snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), "\"");
 
   if (strlen(cmd) >= MAX_CMDLINE - 1) {
     fprintf(stderr, "Command line too long, limited to %d characters\n", MAX_CMDLINE - 1);

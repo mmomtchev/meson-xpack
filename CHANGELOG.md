@@ -1,3 +1,6 @@
+# 1.8.0-3 2025-07-25
+  * New Windows script launcher using the Python `pypa` method
+
 # 1.8.0-2 2025-07-14
   * New Windows script launcher that is independent of the installed Python version
 
