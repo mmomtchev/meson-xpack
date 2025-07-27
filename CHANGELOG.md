@@ -1,3 +1,6 @@
+# 1.8.0-4
+  * Provide `arm64` binaries for Windows and Linux
+
 # 1.8.0-3 2025-07-25
   * New Windows script launcher using the Python `pypa` method
 
