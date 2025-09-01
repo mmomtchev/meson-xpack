@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 
-#define MAX_CMDLINE 32768
+#define MAX_CMDLINE 8191
 
 void ErrorExit(const char *fn) {
   char *error;
