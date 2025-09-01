@@ -95,10 +95,10 @@ int main(int argc, char *argv[]) {
 
   script = get_python_script();
   cmd = malloc(MAX_CMDLINE);
-  snprintf(cmd, MAX_CMDLINE, "cmd /s /c \"python.cmd \"%s\"", script);
+  snprintf(cmd, MAX_CMDLINE, "\"cmd /s /c \"python.cmd \"%s\"", script);
   for (i = 1; i < argc; i++)
     snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), " %s", argv[i]);
-  snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), "\"");
+  snprintf(cmd + strlen(cmd), MAX_CMDLINE - strlen(cmd), "\"\"");
 
   if (strlen(cmd) >= MAX_CMDLINE - 1) {
     fprintf(stderr, "Command line too long, limited to %d characters\n", MAX_CMDLINE - 1);
