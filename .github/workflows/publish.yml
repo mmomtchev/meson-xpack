@@ -23,7 +23,7 @@ jobs:
           - windows-11-arm
 
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
       - uses: actions/checkout@v5
