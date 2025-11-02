@@ -51,11 +51,10 @@
       "meson": "./.content/bin/meson"
     },
     "properties": {
-      "version": "1.8.0",
+      "version": "1.9.1",
       "versionSuffix": "",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-{{ properties.version }}{{ properties.versionSuffix }}",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
-      "pythonDLL": "python310.dll",
       "commandPostInstall": {
         "win32": "copy wrappers\\meson content\\bin\\meson && cl wrappers\\wrapper.c /Fe:content\\bin\\meson.exe /link",
         "linux": "cp wrappers/meson content/bin/meson",
