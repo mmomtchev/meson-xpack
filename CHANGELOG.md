@@ -1,3 +1,7 @@
+# 1.9.1-1
+  * Update `meson` to 1.9.1 from upstream
+  * Drop the old `npm` option handling, handling `npm` options now requires [`hadron`](https://www.npmjs.com/package/@mmomtchev/hadron)
+
 # 1.8.0-4
   * Provide `arm64` binaries for Windows and Linux
 
