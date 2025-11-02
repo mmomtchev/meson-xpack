@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.8.0-3",
+  "version": "1.9.1-1",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -29,23 +29,31 @@
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "meson-xpack-1.8.0-3-darwin-arm64.tar.gz",
-          "sha256": "9161bdbb0b8c04f12cb1aef735a0446bda7ecb2effbe1cd0cb53220928c4e504"
+          "fileName": "meson-xpack-1.9.1-1-darwin-arm64.tar.gz",
+          "sha256": "729744fe545786365952a711d27999d4f9cf5877c0270520f1ac5f1e2ae5de8c"
         },
         "darwin-x64": {
-          "fileName": "meson-xpack-1.8.0-3-darwin-x64.tar.gz",
-          "sha256": "a1193e4441e89d6effecbf62f3d07edd4f2e5b9780c911aec77f333d2d921381"
+          "fileName": "meson-xpack-1.9.1-1-darwin-x64.tar.gz",
+          "sha256": "217d830b1764c6dc2d50b45cabb8dafb1c8bd63c26cde621b129bfa8c22c1e04"
         },
         "linux-x64": {
-          "fileName": "meson-xpack-1.8.0-3-linux-x64.tar.gz",
-          "sha256": "617b41431ddb2713075226f0026ec22e9fd0877888cd37202d37a7e1febe63bc"
+          "fileName": "meson-xpack-1.9.1-1-linux-x64.tar.gz",
+          "sha256": "fa1dbc8c223509b7313a74a4e6b8bf6f8564ead2f6110a1196d9c74126aafac0"
         },
         "win32-x64": {
-          "fileName": "meson-xpack-1.8.0-3-win32-x64.zip",
-          "sha256": "efbd1cb240f985979eec23bff60daae4a9459a689a79bb0b09302f126b9f5cdf"
+          "fileName": "meson-xpack-1.9.1-1-win32-x64.zip",
+          "sha256": "611814b05c577a883714cc46e8dc8bf5091c1e688552ddbf720cff9cc949b67d"
+        },
+        "linux-arm64": {
+          "fileName": "meson-xpack-1.9.1-1-linux-arm64.tar.gz",
+          "sha256": "5bfc9a18ded37f7f9832d1507b1cbc47b72c56289280aeb2302228dbe112856d"
+        },
+        "win32-arm64": {
+          "fileName": "meson-xpack-1.9.1-1-win32-arm64.zip",
+          "sha256": "8d7e36b8d4e689361c9419f9ab9ef6c36fdc0086253ffec573ef588e100d27c1"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.8.0-3"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.9.1-1"
     },
     "bin": {
       "meson": "./.content/bin/meson"
