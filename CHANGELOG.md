@@ -1,3 +1,7 @@
+# 1.10.1-1 2025-12-13
+  * Update `meson` to 1.10.0 from upstream
+  * Drop the extra comma on `-sENVIRONMENT` `emscripten` option for compatibility with the latest changes
+
 # 1.9.1-1 2025-11-02
   * Update `meson` to 1.9.1 from upstream
   * Drop the old `npm` option handling, handling `npm` options now requires [`hadron`](https://www.npmjs.com/package/@mmomtchev/hadron)
