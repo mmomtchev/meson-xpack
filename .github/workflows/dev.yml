@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: main
+    branches: 1.9
   pull_request:
-    branches: main
+    branches: 1.9
 
 jobs:
   install_meson:
