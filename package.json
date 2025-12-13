@@ -59,7 +59,7 @@
       "meson": "./.content/bin/meson"
     },
     "properties": {
-      "version": "1.9.1",
+      "version": "1.9.2",
       "versionSuffix": "",
       "commandInstall": "python -m pip install --target content git+https://github.com/mmomtchev/meson@hadron-{{ properties.version }}{{ properties.versionSuffix }}",
       "pythonPath": "xpacks/@mmomtchev/python-xpack/.content",
