@@ -1,6 +1,6 @@
 {
   "name": "@mmomtchev/meson-xpack",
-  "version": "1.10.0-1",
+  "version": "1.10.1-1",
   "description": "A xPack with meson + node-api",
   "scripts": {
     "postversion": "git push && git push --tags && node ./publish.mjs"
@@ -29,31 +29,31 @@
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "meson-xpack-1.10.0-1-darwin-arm64.tar.gz",
-          "sha256": "c60c4d2b5010507ba632d1ee7e7d0eadfef287bacc3c2e2262ee156234218898"
+          "fileName": "meson-xpack-1.10.1-1-darwin-arm64.tar.gz",
+          "sha256": "be2dd11970d0557cb2fa78fef26d57f4e4c268ec3f852285f63502f9d5abbd1e"
         },
         "darwin-x64": {
-          "fileName": "meson-xpack-1.10.0-1-darwin-x64.tar.gz",
-          "sha256": "b6cd9c206dc917c6af0c0f54e32667de57856f6f3f20fead520377e7779253ce"
+          "fileName": "meson-xpack-1.10.1-1-darwin-x64.tar.gz",
+          "sha256": "bf1271bb40b97ea7f8015e7954fbd46bd9cafb5403c9b55d0bba278e538a6d5e"
         },
         "linux-x64": {
-          "fileName": "meson-xpack-1.10.0-1-linux-x64.tar.gz",
-          "sha256": "b1ec6c004df25400ada71d1ebfc0c8cab66d847f5bcad8beac3376cfef897893"
+          "fileName": "meson-xpack-1.10.1-1-linux-x64.tar.gz",
+          "sha256": "e2dcb151afd85044cfb3b8452334a22dca961db1b5b717f7b96d142dde9d6d15"
         },
         "win32-x64": {
-          "fileName": "meson-xpack-1.10.0-1-win32-x64.zip",
-          "sha256": "750fa59f845df9b8d549473a359b6ba2fa5629e742b7990f955270ee2769adc5"
+          "fileName": "meson-xpack-1.10.1-1-win32-x64.zip",
+          "sha256": "c6835a3cdf6ca5a7cd987346190922f86b1d7d4c89e100fe8947188fe7d01f39"
         },
         "linux-arm64": {
-          "fileName": "meson-xpack-1.10.0-1-linux-arm64.tar.gz",
-          "sha256": "2807dc34e4f18b6040f83edcf75290eb7ea3e40c96c353ca1a5f2cf5a9d2729a"
+          "fileName": "meson-xpack-1.10.1-1-linux-arm64.tar.gz",
+          "sha256": "a4da0487b70db8266b7d317eac11992773d7da6acc0f488dc1e63439d57a04df"
         },
         "win32-arm64": {
-          "fileName": "meson-xpack-1.10.0-1-win32-arm64.zip",
-          "sha256": "73311bde1914a5222da5c9095367054f0feacb95e91d3ca60ac554206b973bf4"
+          "fileName": "meson-xpack-1.10.1-1-win32-arm64.zip",
+          "sha256": "8ea3a6256f06d4ab15f38b5982580b34476a3365750b656aa2e50a6115fa24f5"
         }
       },
-      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.10.0-1"
+      "baseUrl": "https://github.com/mmomtchev/meson-xpack/releases/download/v1.10.1-1"
     },
     "bin": {
       "meson": "./.content/bin/meson"
