@@ -1,4 +1,7 @@
-# 1.10.1-1 2025-12-13
+# 1.10.1-1 2026-01-20
+  * Update `meson` to 1.10.1 from upstream
+
+# 1.10.0-1 2025-12-13
   * Update `meson` to 1.10.0 from upstream
   * Drop the extra comma on `-sENVIRONMENT` `emscripten` option for compatibility with the latest changes
 
